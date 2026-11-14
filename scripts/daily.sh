@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Daily activity: 50-200 commits per day, at random times between 08:00 and 21:59 Dushanbe time.
+# Daily activity: 50-200 commits per day, at random times between 12:00 and 23:00 Dushanbe time.
 # Runs twice a day (main + backup); if today is already done, it does nothing.
 set -euo pipefail
 export TZ="Asia/Dushanbe"
@@ -12,8 +12,8 @@ git config user.name  "theolderera"
 git config user.email "226323070+theolderera@users.noreply.github.com"
 
 COUNT=$(( RANDOM % 151 + 50 ))          # 50..200
-START=$(date -d "$TODAY 08:00" +%s)
-END=$(date -d "$TODAY 21:59" +%s)
+START=$(date -d "$TODAY 12:00" +%s)
+END=$(date -d "$TODAY 23:00" +%s)
 NOW=$(date +%s); [ "$END" -gt "$NOW" ] && END=$NOW
 
 # random sorted timestamps for the day
