@@ -17,7 +17,7 @@ END=$(date -d "$TODAY 21:59" +%s)
 NOW=$(date +%s); [ "$END" -gt "$NOW" ] && END=$NOW
 
 # random sorted timestamps for the day
-mapfile -t TIMES < <(for i in $(seq "$COUNT"); do echo $(( START + RANDOM * 32768 % (END - START + 1) + RANDOM % 60 )); done | awk -v e="$END" '{ if ($1>e) $1=e; print }' | sort -n)
+mapfile -t TIMES < <(for i in $(seq "$COUNT"); do echo $(( START + (RANDOM * 32768 + RANDOM) % (END - START + 1) )); done | awk -v e="$END" '{ if ($1>e) $1=e; print }' | sort -n)
 
 echo "# $TODAY — $COUNT commits" > "$LOG"
 for i in "${!TIMES[@]}"; do
